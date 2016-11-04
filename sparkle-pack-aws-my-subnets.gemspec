@@ -8,5 +8,5 @@ Gem::Specification.new do |s|
   s.email = 'gswallow@indigobio.com'
   s.homepage = 'https://github.com/gswallow/sparkle-pack-aws-my-subnets'
   s.files = Dir[ 'lib/sparkleformation/registry/*' ] + %w(sparkle-pack-aws-my-subnets.gemspec lib/sparkle-pack-aws-my-subnets.rb)
-  s.add_runtime_dependency 'aws-sdk-core', '~> 2.2'
+  s.add_runtime_dependency 'aws-sdk-core', '~> 2'
 end
