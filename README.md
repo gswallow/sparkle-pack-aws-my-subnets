@@ -24,7 +24,7 @@ Gemfile:
 source 'https://rubygems.org'
 
 gem 'sfn'
-gem 'sparkle-pack-aws-aws-my-subnets'
+gem 'sparkle-pack-aws-my-subnets'
 ```
 
 .sfn:
@@ -37,6 +37,6 @@ end
 
 In a SparkleFormation Template/Component/Dynamic:
 ```ruby
-public_subnets = registry!(:my_public_subnet_ids)
+public_subnets registry!(:my_public_subnet_ids)
 ```
 The `public_subnets` registry will return an array of Subnet IDs
