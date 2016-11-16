@@ -6,6 +6,15 @@ zones = ec2.describe_availability_zones.availability_zones.map(&:zone_name)
 
 SparkleFormation.dynamic(:public_subnets) do |options = {}|
   route_table = options.fetch(:public_route_table, :default_ec2_route_table)
+
+  parameters(:cidr_prefix) do
+    type 'Number'
+    min_value '16'
+    max_value '31'
+    default '16'
+    description 'The prefix of the CIDR block to assign to the VPC (172.X.0.0/16)'
+  end
+
   zones.each do |zone|
     subnet = ((zone[-1].ord - 'a'.ord) * 16).to_s
 
