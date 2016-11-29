@@ -73,6 +73,9 @@ If your public and private subnets have `Name` tags, then the
 `my_public_subnet_names` and `my_private_subnet_names` registries
 will return subnets' names.
 
+The `my_vpc` registry will return the VPC whose `Environment` tag matches
+the `ENV['environment']` variable.
+
 ### Dynamics
 
 The `public_subnets` and `private_subnets` dynamics create as many 
