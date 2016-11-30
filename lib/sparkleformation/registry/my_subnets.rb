@@ -31,8 +31,16 @@ SfnRegistry.register(:my_public_subnet_names) do
   public_subnets.map { |sn| sn.tags.map { |tag| tag.value if tag.key == "Name" }.compact }.flatten
 end
 
+SfnRegistry.register(:random_public_subnet_id) do
+  public_subnets.map(&:subnet_id).sample
+end
+
 SfnRegistry.register(:my_private_subnet_ids) do
   private_subnets.map(&:subnet_id)
+end
+
+SfnRegistry.register(:random_private_subnet_id) do
+  private_subnets.map(&:subnet_id).sample
 end
 
 SfnRegistry.register(:my_private_subnet_names) do
