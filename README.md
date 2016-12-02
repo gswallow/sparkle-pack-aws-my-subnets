@@ -69,6 +69,14 @@ The `my_public_subnet_ids` registry will return an array of Subnet IDs where
 each subnet's `Network` tag is set to 'Public.'  Likewise, the
 `my_private_subnet_ids` registry will return Subnet IDs of private subnets.
 
+```ruby
+subnet_id registry!(:public_subnet_id, 0)
+```
+
+The `public_subnet_id` registry returns a single subnet ID.  Optionally, you
+can specify an offset (an index of an array) to control which subnet ID 
+to return.  There is a matching `private_subnet_id` registry.
+
 If your public and private subnets have `Name` tags, then the 
 `my_public_subnet_names` and `my_private_subnet_names` registries
 will return subnets' names.
