@@ -76,6 +76,10 @@ SparkleFormation.dynamic(:private_subnets) do |options = {}|
              -> {
                key 'Environment'
                value ENV['environment']
+             },
+             -> {
+               key 'KubernetesCluster'
+               value "k8s.#{ENV['public_domain']}"
              }
            )
     end
