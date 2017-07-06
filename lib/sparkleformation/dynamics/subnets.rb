@@ -43,6 +43,15 @@ SparkleFormation.dynamic(:public_subnets) do |options = {}|
       subnet_id ref!("#{zone.gsub('-', '_')}_public_ec2_subnet".to_sym)
       route_table_id ref!(route_table)
     end
+
+    dynamic!(:ec2_e_i_p, "#{zone.gsub('-', '_')}_nat").properties do
+      domain 'vpc'
+    end
+
+    dynamic!(:ec2_nat_gateway, "#{zone.gsub('-', '_')}").properties do
+      subnet_id ref!("#{zone.gsub('-', '_')}_public_ec2_subnet".to_sym)
+      allocation_id attr!("#{zone.gsub('-', '_')}_nat_ec2_e_i_p".to_sym, 'AllocationId')
+    end
   end
 end
 
@@ -82,6 +91,12 @@ SparkleFormation.dynamic(:private_subnets) do |options = {}|
                value "k8s.#{ENV['public_domain']}"
              }
            )
+    end
+
+    dynamic!(:ec2_route, "#{zone.gsub('-', '_')}_nat".to_sym).properties do
+      destination_cidr_block '0.0.0.0/0'
+      nat_gateway_id ref!("#{zone.gsub('-', '_')}_ec2_nat_gateway".to_sym)
+      route_table_id ref!("#{zone.gsub('-', '_')}_private_ec2_route_table".to_sym)
     end
 
     dynamic!(:ec2_subnet_route_table_association, "#{zone.gsub('-', '_')}_private").properties do
