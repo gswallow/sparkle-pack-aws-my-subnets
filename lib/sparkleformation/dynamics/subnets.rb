@@ -26,7 +26,8 @@ SparkleFormation.dynamic(:public_subnets) do |options = {}|
       tags _array(
              -> {
                key 'Name'
-               value join!('public', zone, '172', ref!(:cidr_prefix), subnet, '0/20', {:options => { :delimiter => '-' }})
+               value "utility-#{zone}.k8s.#{ENV['public_domain']}"
+#               value join!('public', zone, '172', ref!(:cidr_prefix), subnet, '0/20', {:options => { :delimiter => '-' }})
              },
              -> {
                key 'Network'
@@ -84,7 +85,8 @@ SparkleFormation.dynamic(:private_subnets) do |options = {}|
       tags _array(
              -> {
                key 'Name'
-               value join!('private', zone, '172', ref!(:cidr_prefix), subnet, '0/20', {:options => { :delimiter => '-' }})
+               value "#{zone}.k8s.#{ENV['public_domain']}"
+               #value join!('private', zone, '172', ref!(:cidr_prefix), subnet, '0/20', {:options => { :delimiter => '-' }})
              },
              -> {
                key 'Network'
